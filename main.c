@@ -60,7 +60,28 @@ int main(int argc, const char* argv[]) {
  	printf ("delta_t = %f\n", delta_t);
  	
  	
- // read in graphics turned on 1 or turned off 0
+
+
+  //Read the particle data from the file
+ double *values =(double*)malloc(5*atoi(argv[1])*sizeof(double));
+ read_doubles_from_file(atoi(argv[1]), values, argv[2]);
+ 
+ //Allocate memory for particles  
+ particle_t *particles =(particle_t*)malloc(atoi(argv[1])*sizeof(particle_t));
+ 
+ //Set the particle data  
+ i=0;
+ j=0;  
+ while(j<N){
+    particles[j].x_pos = values[i];
+    particles[j].y_pos = values[i+1];
+    particles[j].mass = values[i+2];
+    particles[j].x_speed = values[i+3];
+    particles[j].y_speed = values[i+4];
+    i=i*5;
+    j++;
+ }
+  // read in graphics turned on 1 or turned off 0
    InitializeGraphics(argv[0],windowWidth,windowWidth);
    
    // A while l
@@ -86,27 +107,6 @@ int main(int argc, const char* argv[]) {
   }
   FlushDisplay();
   CloseDisplay();
-
- //Read the particle data from the file
- double *values =(double*)malloc(5*atoi(argv[1])*sizeof(double));
- read_doubles_from_file(atoi(argv[1]), values, argv[2]);
- 
- //Allocate memory for particles  
- particle_t *particles =(particle_t*)malloc(atoi(argv[1])*sizeof(particle_t));
- 
- //Set the particle data  
- i=0;
- j=0;  
- while(j<N){
-    particles[j].x_pos = values[i];
-    particles[j].y_pos = values[i+1];
-    particles[j].mass = values[i+2];
-    particles[j].x_speed = values[i+3];
-    particles[j].y_speed = values[i+4];
-    i=i*5;
-    j++;
- }
- 
    
   return 0;
  
