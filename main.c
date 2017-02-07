@@ -4,7 +4,7 @@
 #include "file_operations.h"
 
  
-int main(int argc, char** argv[]) { 
+int main(int argc, const char* argv[]) { 
  // read in N filename nsteps delta_t graphics
  // N number of stars/particles to simulate 
  // filename is the filename of the file to read the initial configuration from 
