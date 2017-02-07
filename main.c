@@ -10,14 +10,24 @@ int main(int argc, const char* argv[]) {
  // filename is the filename of the file to read the initial configuration from 
  // nsteps is the number of timesteps
  // graphics is 1 or 0 meaning graphics on/off
-printf("The program runs." );
- 
+
+	if(argc != 6) {
+    printf("Please give in: N filename nsteps delta_t graphics.\n");
+    return -1;
+  }
+	int N = atoi(argv[1]);
+  printf("N = %d\n", N);
+  if(N < 1) {
+    printf("Error: (N < 1).\n");
+    return -1;
+  }
+	
  FILE *ptr_file;
 	char buf[1000];
 	
 	
 
-	ptr_file = fopen(argv[1], "r");
+	ptr_file = fopen(argv[2], "r");
 
 	if(!ptr_file){
 		printf("File does not exist." );
