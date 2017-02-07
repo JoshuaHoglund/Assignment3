@@ -62,22 +62,24 @@ int main(int argc, const char* argv[]) {
  	
 
 
- //Read the particle data from the file
+  //Read the particle data from the file
  double *values =(double*)malloc(5*atoi(argv[1])*sizeof(double));
  read_doubles_from_file(atoi(argv[1]), values, argv[2]);
  
  //Allocate memory for particles  
- particle *particles =(particle*)malloc(atoi(argv[1])*sizeof(particle));
+ particle_t *particles =(particle_t*)malloc(atoi(argv[1])*sizeof(particle_t));
  
  //Set the particle data  
  i=0;
- while(i<5*N){
-    particles[i].x_pos = values[i];
-    particles[i].y_pos = values[i+1];
-    particles[i].mass = values[i+2];
-    particles[i].x_speed = values[i+3];
-    particles[i].y_speed = values[i+4];
+ j=0;  
+ while(j<N){
+    particles[j].x_pos = values[i];
+    particles[j].y_pos = values[i+1];
+    particles[j].mass = values[i+2];
+    particles[j].x_speed = values[i+3];
+    particles[j].y_speed = values[i+4];
     i=i*5;
+    j++;
  }
   // read in graphics turned on 1 or turned off 0
    InitializeGraphics(argv[0],windowWidth,windowWidth);
