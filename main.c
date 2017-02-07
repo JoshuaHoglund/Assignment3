@@ -1,15 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-//#include <X11/Xlib.h>
 #include "file_operations.h"
-//#include "graphics.h"
+#include "graphics.h"
 
 typedef struct particle
 {
    float             x_pos;
    float             y_pos;
    float 	     mass;
+   float       vel_x;
+   float       vel_y;
 } particle_t;
  
 int main(int argc, const char* argv[]) { 
@@ -60,6 +61,31 @@ int main(int argc, const char* argv[]) {
  	
  	
  // read in graphics turned on 1 or turned off 0
+   InitializeGraphics(argv[0],windowWidth,windowWidth);
+   
+   // A while l
+  SetCAxes(0,1);
+
+  printf("Hit q to quit.\n");
+  while(!CheckForQuit()) {
+    /* Move A. */
+    xA += 0.0012;
+    yA += 0.0020;
+    keep_within_box(&xA, &yA);
+    /* Move B. */
+    xB += 0.0007;
+    yB += 0.0018;
+    keep_within_box(&xB, &yB);
+    /* Call graphics routines. */
+    ClearScreen();
+    DrawCircle(xA, yA, L, W, circleRadius, circleColor);
+    DrawCircle(xB, yB, L, W, circleRadius, circleColor);
+    Refresh();
+    /* Sleep a short while to avoid screen flickering. */
+    usleep(3000);
+  }
+  FlushDisplay();
+  CloseDisplay();
 
   return 0;
  
