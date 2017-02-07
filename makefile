@@ -3,21 +3,21 @@ LD = gcc
 CFLAGS = -O3 -Wall -Werror
 LDFLAGS = 
 RM = /bin/rm -f
-OBJS = main.o testfunc1.o testfunc2.o
-EXECUTABLE = restrict_test
+OBJS = main.o file_operations.o graphics.o
+EXECUTABLE = galsim
 
 all:$(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJS)
 	$(LD) $(LDFLAGS) $(OBJS) -o $(EXECUTABLE)
 
-testfunc1.o: testfunc1.h testfunc1.c
-	$(CC) $(CFLAGS) -c testfunc1.c
+graphics.o: graphics.h graphics.c
+	$(CC) $(CFLAGS) -c graphics.c
 
-testfunc2.o: testfunc2.h testfunc2.c
-	$(CC) $(CFLAGS) -c testfunc2.c
+file_operations.o: file_operations.h file_operations.c
+	$(CC) $(CFLAGS) -c file_operations.c
 
-main.o: main.c testfunc1.h testfunc2.h
+main.o: main.c graphics.h file_operations.h
 	$(CC) $(CFLAGS) -c main.c
 
 clean:
