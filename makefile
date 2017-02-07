@@ -1,7 +1,8 @@
 CC = gcc
 LD = gcc
 CFLAGS = -O3 -Wall -Werror
-LDFLAGS = 
+LDFLAGS =-L/opt/X11/lib -lX11 -lm
+INCLUDES=-I/opt/X11/include
 RM = /bin/rm -f
 OBJS = main.o file_operations.o graphics.o
 EXECUTABLE = galsim
@@ -9,16 +10,16 @@ EXECUTABLE = galsim
 all:$(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJS)
-	$(LD) $(LDFLAGS) $(OBJS) -o $(EXECUTABLE)
+	$(LD) $(LDFLAGS) $(OBJS) -o $(EXECUTABLE) $(LDFLAGS)
 
 graphics.o: graphics.h graphics.c
-	$(CC) $(CFLAGS) -c graphics.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c graphics.c 
 
 file_operations.o: file_operations.h file_operations.c
 	$(CC) $(CFLAGS) -c file_operations.c
 
 main.o: main.c graphics.h file_operations.h
-	$(CC) $(CFLAGS) -c main.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c main.c
 
 clean:
 	$(RM) $(EXECUTABLE) $(OBJS)
