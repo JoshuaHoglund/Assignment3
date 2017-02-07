@@ -87,6 +87,25 @@ int main(int argc, const char* argv[]) {
   FlushDisplay();
   CloseDisplay();
 
+ //Read the particle data from the file
+ double *values =(double*)malloc(5*atoi(argv[1])*sizeof(double));
+ read_doubles_from_file(atoi(argv[1]), values, argv[2]);
+ 
+ //Allocate memory for particles  
+ particle *particles =(particle*)malloc(atoi(argv[1])*sizeof(particle));
+ 
+ //Set the particle data  
+ i=0;
+ while(i<5*N){
+    particles[i].x_pos = values[i];
+    particles[i].y_pos = values[i+1];
+    particles[i].mass = values[i+2];
+    particles[i].x_speed = values[i+3];
+    particles[i].y_speed = values[i+4];
+    i=i*5;
+ }
+ 
+   
   return 0;
  
 }
