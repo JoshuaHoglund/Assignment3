@@ -8,7 +8,7 @@ static void update_maxdiff(double dx, double dy, double* maxabsdiff) {
   if(absdiff > *maxabsdiff)
     *maxabsdiff = absdiff;
 }
-
+// i am changing the code 
 int main(int argc, const char* argv[]) {
   if(argc != 4) {
     printf("Give 3 input args: N gal1.gal gal2.gal\n");
