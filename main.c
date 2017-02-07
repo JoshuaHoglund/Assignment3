@@ -3,7 +3,7 @@
 #include <math.h>
 #include <X11/Xlib.h>
 #include "file_operations.h"
-#include "graphics.h"
+//#include "graphics.h"
 
 typedef struct particle
 {
