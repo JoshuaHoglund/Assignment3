@@ -44,19 +44,18 @@ int main(int argc, const char* argv[]) {
   	if(!ptr_file){
   		printf("File does not exist." );
   		return 1;}
- 	
-  	while(fgets(buf, 1000, ptr_file)!=NULL)
-  			printf("%s", buf);
+ 	  // store data of opened file 
+   
  		
   	fclose(ptr_file);
+   
   // read in number of steps
  	int nsteps = atoi(argv[3]);
  	printf ("nsteps = %d\n", nsteps);
  	
  	
- 	
-  // read in time delta t 
- 	float delta_t = atoi(argv[4]);
+  // read in time delta_t
+ 	float delta_t = atof(argv[4]);
  	printf ("delta_t = %f\n", delta_t);
  	
  	
@@ -102,6 +101,7 @@ int main(int argc, const char* argv[]) {
     DrawCircle(xA, yA, L, W, circleRadius, circleColor);
     DrawCircle(xB, yB, L, W, circleRadius, circleColor);
     Refresh();
+     
     /* Sleep a short while to avoid screen flickering. */
     usleep(3000);
   }
