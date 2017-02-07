@@ -80,6 +80,30 @@ int main(int argc, const char* argv[]) {
     i=i*5;
     j++;
  }
+   //Set constants
+   double G = 100/N;
+   double eps = 0.003;
+   double mG;
+   double r;
+   double x;
+   double y;
+   double *F = (double*)malloc(N*sizeof(double));
+   double sum;
+   
+   for(int i=0; i<N; i++){
+      sum=0;
+    mG=G*particles[i].mass;
+      x=particles[i].x_pos;
+      y=particles[i].y_pos;
+      for(int j=0; j<N; j++){
+         r = sqrtf((x-particles[j].x_pos)^2+(y-particles[j].y_pos)^2);
+         //fix this
+         sum+=(particles[j].mass)/(r+eps)^3
+         
+      }
+   }
+   
+   
   // read in graphics turned on 1 or turned off 0
    InitializeGraphics(argv[0],windowWidth,windowWidth);
    
