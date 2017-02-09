@@ -174,6 +174,7 @@ int main(int argc, const char* argv[]) {
            usleep(800);
            updateParticles(delta_t, particles, N);
          }
+      usleep(8000000);
            
 
      
