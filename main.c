@@ -20,7 +20,7 @@ void keep_within_box(float* xA, float* yA) {
     *yA = 0;
 }
 
-void updateParticles(float delta_t, particle_t *particles, int N) {
+void updateParticles(double delta_t, particle_t *particles, int N) {
    //Set constants
    double *forcex=(double*)malloc(N*sizeof(double));
    double *forcey=(double*)malloc(N*sizeof(double));
