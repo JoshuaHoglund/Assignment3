@@ -68,7 +68,8 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
       
    }
    for(int i=0;i<N;i++){
-   particles[i].vel_x += delta_t*forcex[i]/m_i;
+      m_i = particles[i].mass;
+      particles[i].vel_x += delta_t*forcex[i]/m_i;
       particles[i].vel_y += delta_t*forcey[i]/m_i;
       particles[i].x_pos += delta_t*particles[i].vel_x;
       particles[i].y_pos += delta_t*particles[i].vel_y;
