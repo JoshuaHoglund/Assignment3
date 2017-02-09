@@ -160,16 +160,14 @@ int main(int argc, const char* argv[]) {
      CloseDisplay();
    }
 
-   
- double * simulationData = (double *) malloc(5*N*sizeof(double));
  i = 0;
  j = 0;  
  while(j<N){
-    value[i] = particles[j].x_pos;
-    value[i+1] = particles[j].y_pos;
-    value[i+2] = particles[j].mass;
-    value[i+3] = particles[j].vel_x;
-    value[i+4] = particles[j].vel_y;
+    values[i] = particles[j].x_pos;
+    values[i+1] = particles[j].y_pos;
+    values[i+2] = particles[j].mass;
+    values[i+3] = particles[j].vel_x;
+    values[i+4] = particles[j].vel_y;
     j++;
     i=j*5;
  }
