@@ -42,7 +42,7 @@ void updateParticles(float delta_t, particle_t *particles, int N) {
             r_x = x-particles[j].x_pos;
             r_y = y-particles[j].y_pos;
             
-            if(r<0.01) {
+            if(abs_r<0.01) {
                // Plumber spheres
                forceSum_x += m_j*r_x/(pow(abs_r+eps,3));
                forceSum_y += m_j*r_y/(pow(abs_r+eps,3));
@@ -129,8 +129,8 @@ int main(int argc, const char* argv[]) {
     particles[j].x_pos = values[i];
     particles[j].y_pos = values[i+1];
     particles[j].mass = values[i+2];
-    particles[j].x_speed = values[i+3];
-    particles[j].y_speed = values[i+4];
+    particles[j].vel_x = values[i+3];
+    particles[j].vel_y = values[i+4];
     i=i*5;
     j++;
  }
@@ -140,7 +140,7 @@ int main(int argc, const char* argv[]) {
   // read in graphics turned on 1 or turned off 0
    int windowWidth = 10;
    int windowHeight = 10;
-   InitializeGraphics(argv[5],windowWidth,windowHeight);
+   InitializeGraphics(argv[0],windowWidth,windowHeight);
    
    // A while l
   //SetCAxes(0,1);
