@@ -162,9 +162,9 @@ int main(int argc, const char* argv[]) {
            ClearScreen();
            
            for(int i=0;i<N;i++) {
-              x = particles[i].x_pos*600.0;
+              x = particles[i].x_pos/600.0;
               //printf("%lf\n", x);
-              y = particles[i].y_pos*600.0;
+              y = particles[i].y_pos/600.0;
               //printf("%lf\n", y);
               circleRadius = 0.004;
               //keep_within_box((float*) &x, (float*) &y);
