@@ -156,7 +156,7 @@ int main(int argc, const char* argv[]) {
       InitializeGraphics("",windowWidth,windowHeight);
       double x, y, circleRadius;
 
-         while(!CheckForQuit()) {
+         
         for(int t=0;t<nsteps;t++) {
             
            ClearScreen();
@@ -177,8 +177,7 @@ int main(int argc, const char* argv[]) {
            usleep(800);
            updateParticles(delta_t, particles, N);
          }
-            printf("Hit q to quit.\n");
-     }
+           
 
      
      FlushDisplay();
