@@ -194,7 +194,7 @@ int main(int argc, const char* argv[]) {
     simulationData[i+2] = particles[j].mass;
     simulationData[i+3] = particles[j].vel_x;
     simulationData[i+4] = particles[j].vel_y;
-    printf("%lf",simulationData[i] \n);
+    printf("%lf \n",simulationData[i]);
     i=i*5;
     j++;
  }
