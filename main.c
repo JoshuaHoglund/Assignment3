@@ -174,7 +174,7 @@ int main(int argc, const char* argv[]) {
               
            }
            Refresh();
-           usleep(80000000000);
+           usleep(8000000000);
            updateParticles(delta_t, particles, N);
          }
             printf("Hit q to quit.\n");
