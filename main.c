@@ -175,7 +175,7 @@ int main(int argc, const char* argv[]) {
 
    
    
-  // read in graphics turned on 1 or turned off 0
+
 
    
  double * simulationData = malloc(N*sizeof(double));
