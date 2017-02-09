@@ -166,7 +166,7 @@ int main(int argc, const char* argv[]) {
               //printf("%lf\n", x);
               y = particles[i].y_pos;
               //printf("%lf\n", y);
-              circleRadius = 0.04;
+              circleRadius = 0.006;
               keep_within_box((float*) &x, (float*) &y);
               
               DrawCircle(x, y, L, W, circleRadius, 0.1);
