@@ -132,7 +132,11 @@ int main(int argc, const char* argv[]) {
    }
    
    
+   
+   
   // read in graphics turned on 1 or turned off 0
+   int windowWidth = 1;
+   int windowWidth = 1;
    InitializeGraphics(argv[0],windowWidth,windowWidth);
    
    // A while l
