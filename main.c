@@ -6,11 +6,11 @@
 
 typedef struct particle
 {
-   float             x_pos;
-   float             y_pos;
-   float 	     mass;
-   float       vel_x;
-   float       vel_y;
+   double             x_pos;
+   double             y_pos;
+   double 	     mass;
+   double      vel_x;
+   double       vel_y;
 } particle_t;
 
 void keep_within_box(float* xA, float* yA) {
@@ -114,7 +114,7 @@ int main(int argc, const char* argv[]) {
  	
  	
   // read in time delta_t
- 	float delta_t = atof(argv[4]);
+ 	double delta_t = atof(argv[4]);
  	printf ("delta_t = %f\n", delta_t);
  	
  	// read graphics on or off
