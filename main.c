@@ -138,10 +138,12 @@ int main(int argc, const char* argv[]) {
    
    
   // read in graphics turned on 1 or turned off 0
-   InitializeGraphics(argv[0],windowWidth,windowWidth);
+   int windowWidth = 10;
+   int windowHeight = 10;
+   InitializeGraphics(argv[5],windowWidth,windowHeight);
    
    // A while l
-  SetCAxes(0,1);
+  //SetCAxes(0,1);
 
   printf("Hit q to quit.\n");
   while(!CheckForQuit()) {
