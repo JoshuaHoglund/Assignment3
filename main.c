@@ -39,8 +39,8 @@ void updateParticles(float delta_t, particle_t *particles, int N) {
             
             // Calculate the distance betweem particles i and j.
             abs_r = sqrtf(pow(x-particles[j].x_pos,2)+pow(y-particles[j].y_pos,2));
-            r_x = x-particles[j].x;
-            r_y = y-particles[j].y;
+            r_x = x-particles[j].x_pos;
+            r_y = y-particles[j].y_pos;
             
             if(r<0.01) {
                // Plumber spheres
