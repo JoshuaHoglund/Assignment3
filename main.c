@@ -174,8 +174,8 @@ int main(int argc, const char* argv[]) {
     simulationData[i] = particles[j].x_pos;
     simulationData[i+1] = particles[j].y_pos;
     simulationData[i+2] = particles[j].mass;
-    simulationData[i+3] = particles[j].x_speed;
-    simulationData[i+4] = particles[j].y_speed;
+    simulationData[i+3] = particles[j].vel_x;
+    simulationData[i+4] = particles[j].vel_y;
     i=i*5;
     j++;
  }
