@@ -4,6 +4,8 @@
 #include "file_operations.h"
 #include "graphics.h"
 
+
+// use value vector instead
 typedef struct particle
 {
    double             x_pos;
@@ -13,19 +15,12 @@ typedef struct particle
    double       vel_y;
 } particle_t;
 
-void keep_within_box(float* xA, float* yA) {
-  if(*xA > 1)
-    *xA = 0;
-  if(*yA > 1)
-    *yA = 0;
-}
-
 void updateParticles(double delta_t, particle_t *particles, int N) {
    //Set constants
    double *forcex=(double*)malloc(N*sizeof(double));
    double *forcey=(double*)malloc(N*sizeof(double));
-   double G = 100.0/N;
-   double eps = 0.001;
+   const double G = 100.0/N;
+   const double eps = 0.001;
    double abs_r;
    double r_x, r_y;
    double x;
@@ -42,35 +37,30 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
       m_i = particles[i].mass;
       
       // For each particle i, calculate the sum of the forces acting on it
+      // two for loops!!!
       for(int j=0; j<N; j++){
          if(j!=i) {
             m_j = particles[j].mass;
             
             // Calculate the distance betweem particles i and j.
-            abs_r = sqrt(pow(x-particles[j].x_pos,2)+pow(y-particles[j].y_pos,2));
+            // USE SQRTF????
+            abs_r = sqrt((x-particles[j].x_pos)*(x-particles[j].x_pos)+(y-particles[j].y_pos)*(y-particles[j].y_pos));
             r_x = x-particles[j].x_pos;
             r_y = y-particles[j].y_pos;
-            
-            
-               // Plumber spheres
-               forceSum_x += m_j*r_x/(pow(abs_r+eps,3));
-               forceSum_y += m_j*r_y/(pow(abs_r+eps,3));
-              
-            
-            
+            // Plumber spheres
+            // use dummy variable???
+            forceSum_x += m_j*r_x/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
+            forceSum_y += m_j*r_y/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
          }
       }
-      forceSum_x *= -G*m_i;
-      forceSum_y *= -G*m_i;
-      forcex[i] = forceSum_x; 
-      forcey[i] = forceSum_y;
-      // Using the force, update the velocity and position.
-      
+      forcex[i] = -G*m_i*forceSum_x; 
+      forcey[i] = -G*m_i*forceSum_y;      
    }
+   // Using the force, update the velocity and position.
    for(int i=0;i<N;i++){
-      m_i = particles[i].mass;
-      particles[i].vel_x += delta_t*forcex[i]/m_i;
-      particles[i].vel_y += delta_t*forcey[i]/m_i;
+      m_i = 1/particles[i].mass;
+      particles[i].vel_x += delta_t*forcex[i]*m_i;
+      particles[i].vel_y += delta_t*forcey[i]*m_i;
       particles[i].x_pos += delta_t*particles[i].vel_x;
       particles[i].y_pos += delta_t*particles[i].vel_y;
    }
@@ -112,19 +102,10 @@ int main(int argc, const char* argv[]) {
  		
   	fclose(ptr_file);
    
-  // read in number of steps
  	int nsteps = atoi(argv[3]);
- 	printf ("nsteps = %d\n", nsteps);
- 	
- 	
-  // read in time delta_t
  	double delta_t = atof(argv[4]);
- 	printf ("delta_t = %f\n", delta_t);
  	
- 	// read graphics on or off
    int graphics = atoi(argv[5]);
-   
-     //Read the particle data from the file
  double *values =(double*)malloc(5*N*sizeof(double));
  read_doubles_from_file(atoi(argv[1])*5, values, argv[2]);
  
@@ -146,6 +127,7 @@ int main(int argc, const char* argv[]) {
    
    if(!graphics) {
       for(int t=0;t<nsteps;t++) {
+         // dont use function?
          updateParticles(delta_t, particles, N);
       }
    }
@@ -155,36 +137,25 @@ int main(int argc, const char* argv[]) {
       int windowWidth = 600;
       int windowHeight = 600;
       SetCAxes(0,1);
-
-
       InitializeGraphics("",windowWidth,windowHeight);
       double x, y, circleRadius;
-
          
         for(int t=0;t<nsteps;t++) {
             
-           ClearScreen();
-           
+           ClearScreen();           
            for(int i=0;i<N;i++) {
               x = particles[i].x_pos;
               //printf("%lf\n", x);
               y = particles[i].y_pos;
               //printf("%lf\n", y);
               circleRadius = 0.005;
-              //keep_within_box((float*) &x, (float*) &y);
-              
-              DrawCircle(x, y, L, W, circleRadius, 0.1);
-              
-              
+              DrawCircle(x, y, L, W, circleRadius, 0.1);          
            }
            Refresh();
            usleep(800);
            updateParticles(delta_t, particles, N);
          }
-      usleep(8000000);
-           
-
-     
+    
      FlushDisplay();
      CloseDisplay();
    }
@@ -194,13 +165,11 @@ int main(int argc, const char* argv[]) {
  i = 0;
  j = 0;  
  while(j<N){
-    simulationData[i] = particles[j].x_pos;
-    simulationData[i+1] = particles[j].y_pos;
-    simulationData[i+2] = particles[j].mass;
-    simulationData[i+3] = particles[j].vel_x;
-    simulationData[i+4] = particles[j].vel_y;
-    printf("%lf\n", particles[j].vel_x);
-    printf("%lf\n", particles[j].vel_y);
+    value[i] = particles[j].x_pos;
+    value[i+1] = particles[j].y_pos;
+    value[i+2] = particles[j].mass;
+    value[i+3] = particles[j].vel_x;
+    value[i+4] = particles[j].vel_y;
     j++;
     i=j*5;
  }
