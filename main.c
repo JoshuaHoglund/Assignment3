@@ -158,13 +158,13 @@ int main(int argc, const char* argv[]) {
 
          while(!CheckForQuit()) {
         for(int t=0;t<nsteps;t++) {
-            updateParticles(delta_t, particles, N);
+            
            ClearScreen();
            
            for(int i=0;i<N;i++) {
-              x = particles[i].x_pos/600.0;
+              x = particles[i].x_pos;
               //printf("%lf\n", x);
-              y = particles[i].y_pos/600.0;
+              y = particles[i].y_pos;
               //printf("%lf\n", y);
               circleRadius = 0.004;
               //keep_within_box((float*) &x, (float*) &y);
@@ -175,6 +175,7 @@ int main(int argc, const char* argv[]) {
            }
            Refresh();
            usleep(80000000);
+           updateParticles(delta_t, particles, N);
          }
             printf("Hit q to quit.\n");
      }
