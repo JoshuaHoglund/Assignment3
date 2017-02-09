@@ -23,7 +23,7 @@ void keep_within_box(float* xA, float* yA) {
 void updateParticles(float delta_t, particle_t *particles, int N) {
    //Set constants
    double G = 100.0/N;
-   double eps = 0.003;
+   double eps = 0.001;
    double abs_r;
    double r_x, r_y;
    double x;
