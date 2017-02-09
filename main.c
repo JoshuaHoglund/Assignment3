@@ -191,8 +191,9 @@ int main(int argc, const char* argv[]) {
     simulationData[i+2] = particles[j].mass;
     simulationData[i+3] = particles[j].vel_x;
     simulationData[i+4] = particles[j].vel_y;
-    i=i*5;
+    
     j++;
+    i=j*5;
  }
    write_doubles_to_file(5*N,simulationData,"result.gal");
    
