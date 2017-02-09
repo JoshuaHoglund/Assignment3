@@ -31,6 +31,7 @@ void updateParticles(float delta_t, particle_t *particles, int N) {
    double forceSum_x, forceSum_y;
    double m_j;
    double m_i;
+   printf("%d \n",1);
    
    for(int i=0; i<N; i++){
       forceSum_x = 0;
@@ -126,6 +127,9 @@ int main(int argc, const char* argv[]) {
  
  //Allocate memory for particles  
  particle_t *particles = (particle_t*)malloc(N*sizeof(particle_t));
+   
+   printf("N: %d",N);
+   printf("delta_t %lf",delta_t);
  
  //Set the particle data  
  int i = 0;
