@@ -15,7 +15,7 @@ typedef struct particle
 
 void updateParticles(float delta_t, particle_t *particles, int N) {
    //Set constants
-   double G = 100/N;
+   double G = 100.0/N;
    double eps = 0.003;
    double abs_r;
    double r_x, r_y;
@@ -113,6 +113,44 @@ int main(int argc, const char* argv[]) {
  	
  	// read graphics on or off
    int graphics = atoi(argv[5]);
+   
+   if(!graphics) {
+      for(int t=0;t<nsteps;t++) {
+         updateParticles(delta_t, particles, N);
+      }
+   }
+   else {
+      int L = 1;
+      int W = 1;
+      int windowWidth = 10;
+      int windowHeight = 10;
+      SetCAxes(0,1);
+
+
+      InitializeGraphics("",windowWidth,windowHeight);
+      double x, y, circleRadius
+
+         while(!CheckForQuit()) {
+        for(int t=0;t<nsteps;t++) {
+            updateParticles(delta_t, particles, N);
+           for(int i=0;i<N;i++) {
+              x = particles[i].x_pos;
+              y = particles[i].y_pos;
+              circleRadius = 0.1*particles[i].mass;
+              keep_within_box(&x, &y);
+              ClearScreen();
+              DrawCircle(x, y, L, W, circleRadius, 0.1);
+              Refresh();
+              usleep(3000);
+           }
+         }
+            printf("Hit q to quit.\n");
+     }
+
+     
+     FlushDisplay();
+     CloseDisplay();
+   }
 
 
   //Read the particle data from the file
@@ -138,34 +176,7 @@ int main(int argc, const char* argv[]) {
    
    
   // read in graphics turned on 1 or turned off 0
-   int windowWidth = 10;
-   int windowHeight = 10;
-   InitializeGraphics(argv[5],windowWidth,windowHeight);
-   
-   // A while l
-  //SetCAxes(0,1);
-
-  printf("Hit q to quit.\n");
-  while(!CheckForQuit()) {
-    /* Move A. */
-    xA += 0.0012;
-    yA += 0.0020;
-    keep_within_box(&xA, &yA);
-    /* Move B. */
-    xB += 0.0007;
-    yB += 0.0018;
-    keep_within_box(&xB, &yB);
-    /* Call graphics routines. */
-    ClearScreen();
-    DrawCircle(xA, yA, L, W, circleRadius, circleColor);
-    DrawCircle(xB, yB, L, W, circleRadius, circleColor);
-    Refresh();
-     
-    /* Sleep a short while to avoid screen flickering. */
-    usleep(3000);
-  }
-  FlushDisplay();
-  CloseDisplay();
+  
    
  double * simulationData = malloc(N*sizeof(double));
  i = 0;
