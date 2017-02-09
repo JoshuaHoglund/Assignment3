@@ -13,6 +13,13 @@ typedef struct particle
    float       vel_y;
 } particle_t;
 
+void keep_within_box(float* xA, float* yA) {
+  if(*xA > 1)
+    *xA = 0;
+  if(*yA > 1)
+    *yA = 0;
+}
+
 void updateParticles(float delta_t, particle_t *particles, int N) {
    //Set constants
    double G = 100.0/N;
