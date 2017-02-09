@@ -89,7 +89,6 @@ int main(int argc, const char* argv[]) {
   	
  // read in filename and open filename. 	
    FILE *ptr_file;
-  	char buf[1000];
  
 
   	ptr_file = fopen(argv[2], "r");
