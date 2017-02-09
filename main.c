@@ -114,6 +114,26 @@ int main(int argc, const char* argv[]) {
  	// read graphics on or off
    int graphics = atoi(argv[5]);
    
+     //Read the particle data from the file
+ double *values =(double*)malloc(5*N*sizeof(double));
+ read_doubles_from_file(atoi(argv[1]), values, argv[2]);
+ 
+ //Allocate memory for particles  
+ particle_t *particles = (particle_t*)malloc(N*sizeof(particle_t));
+ 
+ //Set the particle data  
+ int i = 0;
+ int j = 0;  
+ while(j<N){
+    particles[j].x_pos = values[i];
+    particles[j].y_pos = values[i+1];
+    particles[j].mass = values[i+2];
+    particles[j].vel_x = values[i+3];
+    particles[j].vel_y = values[i+4];
+    i=i*5;
+    j++;
+ }
+   
    if(!graphics) {
       for(int t=0;t<nsteps;t++) {
          updateParticles(delta_t, particles, N);
@@ -151,31 +171,6 @@ int main(int argc, const char* argv[]) {
      FlushDisplay();
      CloseDisplay();
    }
-
-
-  //Read the particle data from the file
- double *values =(double*)malloc(5*N*sizeof(double));
- read_doubles_from_file(atoi(argv[1]), values, argv[2]);
- 
- //Allocate memory for particles  
- particle_t *particles = (particle_t*)malloc(N*sizeof(particle_t));
- 
- //Set the particle data  
- int i = 0;
- int j = 0;  
- while(j<N){
-    particles[j].x_pos = values[i];
-    particles[j].y_pos = values[i+1];
-    particles[j].mass = values[i+2];
-    particles[j].vel_x = values[i+3];
-    particles[j].vel_y = values[i+4];
-    i=i*5;
-    j++;
- }
-
-   
-   
-
 
    
  double * simulationData = malloc(N*sizeof(double));
