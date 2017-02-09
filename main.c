@@ -19,8 +19,8 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
    //Set constants
    double *forcex=(double*)malloc(N*sizeof(double));
    double *forcey=(double*)malloc(N*sizeof(double));
-   double G = 100.0/N;
-   double eps = 0.001;
+   const double G = 100.0/N;
+   const double eps = 0.001;
    double abs_r;
    double r_x, r_y;
    double x;
@@ -28,6 +28,7 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
    double forceSum_x, forceSum_y;
    double m_j;
    double m_i;
+   double k;
    
    for(int i=0; i<N; i++){
       forceSum_x = 0;
@@ -49,8 +50,9 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
             r_y = y-particles[j].y_pos;
             // Plumber spheres
             // use dummy variable???
-            forceSum_x += m_j*r_x/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
-            forceSum_y += m_j*r_y/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
+            k = m_j/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
+            forceSum_x += k*r_x;
+            forceSum_y += k*r_y;
          }
       }
       forcex[i] = -G*m_i*forceSum_x; 
