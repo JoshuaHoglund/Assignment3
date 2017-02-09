@@ -174,7 +174,7 @@ int main(int argc, const char* argv[]) {
               
            }
            Refresh();
-           usleep(800000000000);
+           usleep(80000000);
          }
             printf("Hit q to quit.\n");
      }
