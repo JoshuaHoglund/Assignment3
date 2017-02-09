@@ -22,6 +22,8 @@ void keep_within_box(float* xA, float* yA) {
 
 void updateParticles(float delta_t, particle_t *particles, int N) {
    //Set constants
+   double *forcex=(double*)malloc(N*sizeof(double))
+   double *forcey=(double*)malloc(N*sizeof(double))
    double G = 100.0/N;
    double eps = 0.001;
    double abs_r;
@@ -53,19 +55,23 @@ void updateParticles(float delta_t, particle_t *particles, int N) {
                // Plumber spheres
                forceSum_x += m_j*r_x/(pow(abs_r+eps,3));
                forceSum_y += m_j*r_y/(pow(abs_r+eps,3));
+              
             
             
          }
       }
       forceSum_x *= -G*m_i;
       forceSum_y *= -G*m_i;
-      
+      forcex[j] = forceSum_x; 
+      forcey[j] = forceSum_y;
       // Using the force, update the velocity and position.
-      particles[i].vel_x += delta_t*forceSum_x/m_i;
-      particles[i].vel_y += delta_t*forceSum_y/m_i;
+      
+   }
+   for(int i=0;i<N;i++){
+   particles[i].vel_x += delta_t*forcex[i]/m_i;
+      particles[i].vel_y += delta_t*forcey[i]/m_i;
       particles[i].x_pos += delta_t*particles[i].vel_x;
       particles[i].y_pos += delta_t*particles[i].vel_y;
-      
    }
 }
 
