@@ -126,9 +126,6 @@ int main(int argc, const char* argv[]) {
  
  //Allocate memory for particles  
  particle_t *particles = (particle_t*)malloc(N*sizeof(particle_t));
-   
-   printf("N: %d",N);
-   printf("delta_t %lf",delta_t);
  
  //Set the particle data  
  int i = 0;
