@@ -49,15 +49,12 @@ void updateParticles(float delta_t, particle_t *particles, int N) {
             r_x = x-particles[j].x_pos;
             r_y = y-particles[j].y_pos;
             
-            if(abs_r<0.1) {
+            
                // Plumber spheres
                forceSum_x += m_j*r_x/(pow(abs_r+eps,3));
                forceSum_y += m_j*r_y/(pow(abs_r+eps,3));
-            }
-            else {
-               forceSum_x += m_j*r_x/(abs_r*abs_r);
-               forceSum_y += m_j*r_y/(abs_r*abs_r);
-            }
+            
+            
          }
       }
       forceSum_x *= -G*m_i;
