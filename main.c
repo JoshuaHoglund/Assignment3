@@ -140,7 +140,7 @@ int main(int argc, const char* argv[]) {
     particles[j].mass = values[i+2];
     particles[j].vel_x = values[i+3];
     particles[j].vel_y = values[i+4];
-    printf("%lf",values[i]);
+    printf("%lf \n",values[i]);
     i=i*5;
     j++;
  }
