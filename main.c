@@ -148,7 +148,7 @@ int main(int argc, const char* argv[]) {
 
 
       InitializeGraphics("",windowWidth,windowHeight);
-      double x, y, circleRadius
+      double x, y, circleRadius;
 
          while(!CheckForQuit()) {
         for(int t=0;t<nsteps;t++) {
