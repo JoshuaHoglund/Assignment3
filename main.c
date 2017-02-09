@@ -45,7 +45,7 @@ void updateParticles(float delta_t, particle_t *particles, int N) {
             m_j = particles[j].mass;
             
             // Calculate the distance betweem particles i and j.
-            abs_r = sqrtf(pow(x-particles[j].x_pos,2)+pow(y-particles[j].y_pos,2));
+            abs_r = sqrt(pow(x-particles[j].x_pos,2)+pow(y-particles[j].y_pos,2));
             r_x = x-particles[j].x_pos;
             r_y = y-particles[j].y_pos;
             
