@@ -171,7 +171,7 @@ int main(int argc, const char* argv[]) {
     j++;
     i=j*5;
  }
-   write_doubles_to_file(5*N,simulationData,"result.gal");
+   write_doubles_to_file(5*N,values,"result.gal");
    
   return 0;
  
