@@ -171,7 +171,7 @@ int main(int argc, const char* argv[]) {
               //printf("%lf\n", x);
               y = particles[i].y_pos;
               //printf("%lf\n", y);
-              circleRadius = 0.004;
+              circleRadius = 0.008;
               //keep_within_box((float*) &x, (float*) &y);
               
               DrawCircle(x, y, L, W, circleRadius, 0.1);
@@ -179,7 +179,7 @@ int main(int argc, const char* argv[]) {
               
            }
            Refresh();
-           usleep(800000000);
+           usleep(8000);
            updateParticles(delta_t, particles, N);
          }
             printf("Hit q to quit.\n");
