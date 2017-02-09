@@ -31,7 +31,6 @@ void updateParticles(float delta_t, particle_t *particles, int N) {
    double forceSum_x, forceSum_y;
    double m_j;
    double m_i;
-   printf("%d \n",1);
    
    for(int i=0; i<N; i++){
       forceSum_x = 0;
@@ -171,7 +170,7 @@ int main(int argc, const char* argv[]) {
               //printf("%lf\n", x);
               y = particles[i].y_pos;
               //printf("%lf\n", y);
-              circleRadius = 0.008;
+              circleRadius = 0.005;
               //keep_within_box((float*) &x, (float*) &y);
               
               DrawCircle(x, y, L, W, circleRadius, 0.1);
@@ -179,7 +178,7 @@ int main(int argc, const char* argv[]) {
               
            }
            Refresh();
-           usleep(8000);
+           usleep(800);
            updateParticles(delta_t, particles, N);
          }
             printf("Hit q to quit.\n");
@@ -200,7 +199,6 @@ int main(int argc, const char* argv[]) {
     simulationData[i+2] = particles[j].mass;
     simulationData[i+3] = particles[j].vel_x;
     simulationData[i+4] = particles[j].vel_y;
-    printf("%lf \n",simulationData[i]);
     i=i*5;
     j++;
  }
