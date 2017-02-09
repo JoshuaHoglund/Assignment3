@@ -39,10 +39,10 @@ void updateParticles(float delta_t, particle_t *particles, int N) {
             
             // Calculate the distance betweem particles i and j.
             abs_r = sqrtf(pow(x-particles[j].x_pos,2)+pow(y-particles[j].y_pos,2));
-            r_x = x-particles[j].x;
-            r_y = y-particles[j].y;
+            r_x = x-particles[j].x_pos;
+            r_y = y-particles[j].y_pos;
             
-            if(r<0.01) {
+            if(abs_r<0.01) {
                // Plumber spheres
                forceSum_x += m_j*r_x/(pow(abs_r+eps,3));
                forceSum_y += m_j*r_y/(pow(abs_r+eps,3));
@@ -167,8 +167,8 @@ int main(int argc, const char* argv[]) {
     particles[j].x_pos = values[i];
     particles[j].y_pos = values[i+1];
     particles[j].mass = values[i+2];
-    particles[j].x_speed = values[i+3];
-    particles[j].y_speed = values[i+4];
+    particles[j].vel_x = values[i+3];
+    particles[j].vel_y = values[i+4];
     i=i*5;
     j++;
  }
@@ -176,7 +176,7 @@ int main(int argc, const char* argv[]) {
    
    
   // read in graphics turned on 1 or turned off 0
-  
+
    
  double * simulationData = malloc(N*sizeof(double));
  i = 0;
@@ -185,8 +185,8 @@ int main(int argc, const char* argv[]) {
     simulationData[i] = particles[j].x_pos;
     simulationData[i+1] = particles[j].y_pos;
     simulationData[i+2] = particles[j].mass;
-    simulationData[i+3] = particles[j].x_speed;
-    simulationData[i+4] = particles[j].y_speed;
+    simulationData[i+3] = particles[j].vel_x;
+    simulationData[i+4] = particles[j].vel_y;
     i=i*5;
     j++;
  }
