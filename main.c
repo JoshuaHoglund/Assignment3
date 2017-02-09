@@ -12,6 +12,59 @@ typedef struct particle
    float       vel_x;
    float       vel_y;
 } particle_t;
+
+void updateParticles(float delta_t, particle_t *particles, int N) {
+   //Set constants
+   double G = 100/N;
+   double eps = 0.003;
+   double abs_r;
+   double r_x, r_y;
+   double x;
+   double y;
+   double forceSum_x, forceSum_y;
+   double m_j;
+   double m_i;
+   
+   for(int i=0; i<N; i++){
+      forceSum_x = 0;
+      forceSum_y = 0;
+      x = particles[i].x_pos;
+      y = particles[i].y_pos;
+      m_i = particles[i].mass;
+      
+      // For each particle i, calculate the sum of the forces acting on it
+      for(int j=0; j<N; j++){
+         if(j!=i) {
+            m_j = particles[j].mass;
+            
+            // Calculate the distance betweem particles i and j.
+            abs_r = sqrtf(pow(x-particles[j].x_pos,2)+pow(y-particles[j].y_pos,2));
+            r_x = x-particles[j].x;
+            r_y = y-particles[j].y;
+            
+            if(r<0.01) {
+               // Plumber spheres
+               forceSum_x += m_j*r_x/(pow(abs_r+eps,3));
+               forceSum_y += m_j*r_y/(pow(abs_r+eps,3));
+            }
+            else {
+               forceSum_x += m_j*r_x/(abs_r*abs_r);
+               forceSum_y += m_j*r_y/(abs_r*abs_r);
+            }
+         }
+      }
+      forceSum_x *= -G*m_i;
+      forceSum_y *= -G*m_i;
+      
+      // Using the force, update the velocity and position.
+      particles[i].vel_x += delta_t*forceSum_x/m_i;
+      particles[i].vel_y += delta_t*forceSum_y/m_i;
+      particles[i].x_pos += delta_t*particles[i].vel_x;
+      particles[i].y_pos += delta_t*particles[i].vel_y;
+      
+   }
+}
+
  
 int main(int argc, const char* argv[]) { 
  // read in N filename nsteps delta_t graphics
@@ -81,55 +134,7 @@ int main(int argc, const char* argv[]) {
     i=i*5;
     j++;
  }
-   //Set constants
-   double G = 100/N;
-   double eps = 0.003;
-   double abs_r;
-   double r_x, r_y;
-   double x;
-   double y;
-   double *F = (double*)malloc(N*sizeof(double));
-   double forceSum_x, forceSum_y;
-   double m_j;
-   double m_i;
-   
-   for(int i=0; i<N; i++){
-      forceSum_x = 0;
-      forceSum_y = 0;
-      x = particles[i].x_pos;
-      y = particles[i].y_pos;
-      m_i = particles[i].mass;
-      // For each particle i, calculate the sum of the forces acting on it
-      for(int j=0; j<N; j++){
-         if(j!=i) {
-            m_j = particles[j].mass;
-            
-            // Calculate the distance betweem particles i and j.
-            abs_r = sqrtf(pow(x-particles[j].x_pos,2)+pow(y-particles[j].y_pos,2));
-            r_x = x-particles[j].x;
-            r_y = y-particles[j].y;
-            
-            if(r<0.01) {
-               // Plumber spheres
-               forceSum_x += m_j*r_x/(pow(abs_r+eps,3));
-               forceSum_y += m_j*r_y/(pow(abs_r+eps,3));
-            }
-            else {
-               forceSum_x += m_j*r_x/(abs_r*abs_r);
-               forceSum_y += m_j*r_y/(abs_r*abs_r);
-            }
-         }
-      }
-      forceSum_x *= -G*m_i;
-      forceSum_y *= -G*m_i;
-      
-      // Using the force, update the velocity and position.
-      particles[i].vel_x += delta_t*forceSum_x/m_i;
-      particles[i].vel_y += delta_t*forceSum_y/m_i;
-      particles[i].x_pos += delta_t*particles[i].vel_x;
-      particles[i].y_pos += delta_t*particles[i].vel_y;
-      
-   }
+
    
    
   // read in graphics turned on 1 or turned off 0
