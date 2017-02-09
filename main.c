@@ -163,9 +163,9 @@ int main(int argc, const char* argv[]) {
            
            for(int i=0;i<N;i++) {
               x = particles[i].x_pos;
-              printf("%lf\n", x);
+              //printf("%lf\n", x);
               y = particles[i].y_pos;
-              printf("%lf\n", y);
+              //printf("%lf\n", y);
               circleRadius = 0.04;
               keep_within_box((float*) &x, (float*) &y);
               
