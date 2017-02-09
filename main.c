@@ -163,7 +163,7 @@ int main(int argc, const char* argv[]) {
               x = particles[i].x_pos;
               y = particles[i].y_pos;
               circleRadius = 0.1*particles[i].mass;
-              keep_within_box(&x, &y);
+              keep_within_box((float*) &x, (float*) &y);
               ClearScreen();
               DrawCircle(x, y, L, W, circleRadius, 0.1);
               Refresh();
