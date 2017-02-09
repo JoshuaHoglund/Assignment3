@@ -122,7 +122,7 @@ int main(int argc, const char* argv[]) {
    
      //Read the particle data from the file
  double *values =(double*)malloc(5*N*sizeof(double));
- read_doubles_from_file(atoi(argv[1]), values, argv[2]);
+ read_doubles_from_file(atoi(argv[1])*5, values, argv[2]);
  
  //Allocate memory for particles  
  particle_t *particles = (particle_t*)malloc(N*sizeof(particle_t));
