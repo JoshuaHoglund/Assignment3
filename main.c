@@ -141,8 +141,8 @@ int main(int argc, const char* argv[]) {
     particles[j].vel_x = values[i+3];
     particles[j].vel_y = values[i+4];
     printf("%lf \n",values[i]);
-    i=i*5;
     j++;
+    i=j*5;
  }
    
    if(!graphics) {
