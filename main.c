@@ -148,8 +148,8 @@ int main(int argc, const char* argv[]) {
    else {
       int L = 1;
       int W = 1;
-      int windowWidth = 10;
-      int windowHeight = 10;
+      int windowWidth = 600;
+      int windowHeight = 600;
       SetCAxes(0,1);
 
 
