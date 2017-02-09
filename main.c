@@ -19,8 +19,8 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
    //Set constants
    double *forcex=(double*)malloc(N*sizeof(double));
    double *forcey=(double*)malloc(N*sizeof(double));
-   const double G = 100.0/N;
-   const double eps = 0.001;
+   double G = 100.0/N;
+   double eps = 0.001;
    double abs_r;
    double r_x, r_y;
    double x;
