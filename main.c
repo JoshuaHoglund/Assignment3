@@ -167,6 +167,20 @@ int main(int argc, const char* argv[]) {
   FlushDisplay();
   CloseDisplay();
    
+ double * simulationData = malloc(N*sizeof(double));
+ i = 0;
+ j = 0;  
+ while(j<N){
+    simulationData[i] = particles[j].x_pos;
+    simulationData[i+1] = particles[j].y_pos;
+    simulationData[i+2] = particles[j].mass;
+    simulationData[i+3] = particles[j].x_speed;
+    simulationData[i+4] = particles[j].y_speed;
+    i=i*5;
+    j++;
+ }
+   write_doubles_to_file(5*N,simulationData,"result.gal");
+   
   return 0;
  
 }
