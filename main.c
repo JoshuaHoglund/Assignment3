@@ -140,7 +140,8 @@ int main(int argc, const char* argv[]) {
   // read in graphics turned on 1 or turned off 0
    int windowWidth = 10;
    int windowHeight = 10;
-   InitializeGraphics(argv[0],windowWidth,windowHeight);
+   char *command;
+   InitializeGraphics(*command,windowWidth,windowHeight);
    
    // A while l
   //SetCAxes(0,1);
