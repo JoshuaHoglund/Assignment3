@@ -49,7 +49,7 @@ void updateParticles(float delta_t, particle_t *particles, int N) {
             r_x = x-particles[j].x_pos;
             r_y = y-particles[j].y_pos;
             
-            if(abs_r<0.01) {
+            if(abs_r<0.001) {
                // Plumber spheres
                forceSum_x += m_j*r_x/(pow(abs_r+eps,3));
                forceSum_y += m_j*r_y/(pow(abs_r+eps,3));
@@ -174,7 +174,7 @@ int main(int argc, const char* argv[]) {
               
            }
            Refresh();
-           usleep(8000);
+           usleep(800000000000);
          }
             printf("Hit q to quit.\n");
      }
