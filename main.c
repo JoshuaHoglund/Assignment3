@@ -22,8 +22,8 @@ void keep_within_box(float* xA, float* yA) {
 
 void updateParticles(float delta_t, particle_t *particles, int N) {
    //Set constants
-   double *forcex=(double*)malloc(N*sizeof(double))
-   double *forcey=(double*)malloc(N*sizeof(double))
+   double *forcex=(double*)malloc(N*sizeof(double));
+   double *forcey=(double*)malloc(N*sizeof(double));
    double G = 100.0/N;
    double eps = 0.001;
    double abs_r;
