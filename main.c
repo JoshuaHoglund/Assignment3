@@ -182,7 +182,7 @@ int main(int argc, const char* argv[]) {
    }
 
    
- double * simulationData = malloc(5*N*sizeof(double));
+ double * simulationData = (double *) malloc(5*N*sizeof(double));
  i = 0;
  j = 0;  
  while(j<N){
