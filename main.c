@@ -17,8 +17,8 @@ typedef struct particle
 
 void updateParticles(double delta_t, particle_t *particles, int N) {
    //Set constants
-   double *forcex=(double*)malloc(N*sizeof(double));
-   double *forcey=(double*)malloc(N*sizeof(double));
+   double *forcex=(double*)calloc(N,sizeof(double));
+   double *forcey=(double*)calloc(N,sizeof(double));
    const double G = 100.0/N;
    const double eps = 0.001;
    double abs_r;
