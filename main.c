@@ -49,9 +49,9 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
             // use dummy variable???
             k = -G*m_i*m_j/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
             forcex[i] += k*r_x; 
-            forcey[i] = k*r_y;
-            forcex[j] = -k*r_x; 
-            forcey[j] = -k*r_y;
+            forcey[i] += k*r_y;
+            forcex[j] += -k*r_x; 
+            forcey[j] += -k*r_y;
             
       }
          
