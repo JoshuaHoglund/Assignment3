@@ -17,23 +17,26 @@ void updateParticles(double delta_t, double* values, int N) {
    double m_j;
    double m_i;
    double k;
+   int fiveI;
+   int fiveJ;
    
    for(int i=0; i<N; i++){
-      x = values[5*i];
-      y = values[5*i+1];
-      m_i = values[5*i+2];
+      fiveI=5*i;
+      x = values[fiveI];
+      y = values[fiveI+1];
+      m_i = values[fiveI+2];
       
       // For each particle i, calculate the sum of the forces acting on it
       // two for loops!!!
       for(int j=i+1; j<N; j++){
-         
-            m_j = values[5*j+2];
+         fiveJ=5*j;
+            m_j = values[fiveJ+2];
             
             // Calculate the distance betweem particles i and j.
             // USE SQRTF????
-            abs_r = sqrt((x-values[5*j])*(x-values[5*j])+(y-values[5*j+1])*(y-values[5*j+1]));
-            r_x = x-values[5*j];
-            r_y = y-values[5*j+1];
+            abs_r = sqrt((x-values[fiveJ])*(x-values[fiveJ])+(y-values[fiveJ+1])*(y-values[fiveJ+1]));
+            r_x = x-values[fiveJ];
+            r_y = y-values[fiveJ+1];
             // Plumber spheres
             // use dummy variable???
             k = -G*m_i*m_j/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
@@ -47,11 +50,12 @@ void updateParticles(double delta_t, double* values, int N) {
    }
    // Using the force, update the velocity and position.
    for(int i=0;i<N;i++){
-      m_i = 1/values[5*i+2];
-      values[5*i+3]+=delta_t*forcex[i]*m_i;
-      values[5*i+4]+=delta_t*forcey[i]*m_i;
-      values[5*i]+=delta_t*values[5*i+3];
-      values[5*i+1]+=delta_t*values[5*i+4];
+      fiveI=5*i;
+      m_i = 1/values[fiveI+2];
+      values[fiveI+3]+=delta_t*forcex[i]*m_i;
+      values[fiveI+4]+=delta_t*forcey[i]*m_i;
+      values[fiveI]+=delta_t*values[fiveI+3];
+      values[fiveI+1]+=delta_t*values[fiveI+4];
    }
    free(forcex);
   free(forcey);
