@@ -4,17 +4,6 @@
 #include "file_operations.h"
 #include "graphics.h"
 
-
-// use value vector instead
-typedef struct particle
-{
-   double             x_pos;
-   double             y_pos;
-   double 	     mass;
-   double      vel_x;
-   double       vel_y;
-} particle_t;
-
 void updateParticles(double delta_t, double* values, int N) {
    //Set constants
    double *forcex=(double*)calloc(N,sizeof(double));
@@ -135,9 +124,9 @@ int main(int argc, const char* argv[]) {
             
            ClearScreen();           
            for(int i=0;i<N;i++) {
-              x = particles[i].x_pos;
+              x = values[5*i];
               //printf("%lf\n", x);
-              y = particles[i].y_pos;
+              y = values[5*i+1];
               //printf("%lf\n", y);
               circleRadius = 0.005;
               DrawCircle(x, y, L, W, circleRadius, 0.1);          
