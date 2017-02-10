@@ -106,10 +106,10 @@ int main(int argc, const char* argv[]) {
    
  	int nsteps = atoi(argv[3]);
  	double delta_t = atof(argv[4]);
- 	
    int graphics = atoi(argv[5]);
- double *values =(double*)malloc(5*N*sizeof(double));
- read_doubles_from_file(atoi(argv[1])*5, values, argv[2]);
+   int fiveN=5*N;
+ double *values =(double*)malloc(fiveN*sizeof(double));
+ read_doubles_from_file(fiveN, values, argv[2]);
  
  //Allocate memory for particles  
  particle_t *particles = (particle_t*)malloc(N*sizeof(particle_t));
@@ -173,7 +173,7 @@ int main(int argc, const char* argv[]) {
     j++;
     i=j*5;
  }
-   write_doubles_to_file(5*N,values,"result.gal");
+   write_doubles_to_file(fiveN,values,"result.gal");
    
   return 0;
  
