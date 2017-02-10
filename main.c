@@ -65,8 +65,8 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
       particles[i].x_pos += delta_t*particles[i].vel_x;
       particles[i].y_pos += delta_t*particles[i].vel_y;
    }
-   free(forcex);
-   free(forcey);
+   //free(forcex);
+   //free(forcey);
 }
 
  
