@@ -43,8 +43,8 @@ void updateParticles(double delta_t, double* values, int N) {
             forcey[j] += -k*r_y;
          
       }
-      //forcex[i] = -G*m_i*forceSum_x; 
-      //forcey[i] = -G*m_i*forceSum_y;      
+      forcex[i] = -G*m_i*forceSum_x; 
+      forcey[i] = -G*m_i*forceSum_y;      
         
    }
    // Using the force, update the velocity and position.
@@ -55,8 +55,8 @@ void updateParticles(double delta_t, double* values, int N) {
       values[5*i]+=delta_t*values[5*i+3];
       values[5*i+1]+=delta_t*values[5*i+4];
    }
-   //free(forcex);
-  // free(forcey);
+   free(forcex);
+  free(forcey);
 }
 
  
@@ -100,7 +100,7 @@ int main(int argc, const char* argv[]) {
  	
    int graphics = atoi(argv[5]);
  double *values =(double*)malloc(5*N*sizeof(double));
- read_doubles_from_file(atoi(argv[1])*5, values, argv[2]);
+ read_doubles_from_file(N*5, values, ptr_file);
  
  //Allocate memory for particles  
    
