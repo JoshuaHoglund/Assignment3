@@ -39,8 +39,8 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
       
       // For each particle i, calculate the sum of the forces acting on it
       // two for loops!!!
-      for(int j=0; j<N; j++){
-         if(j!=i) {
+      for(int j=i+1; j<N; j++){
+         
             m_j = particles[j].mass;
             
             // Calculate the distance betweem particles i and j.
@@ -50,13 +50,15 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
             r_y = y-particles[j].y_pos;
             // Plumber spheres
             // use dummy variable???
-            k = m_j/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
-            forceSum_x += k*r_x;
-            forceSum_y += k*r_y;
-         }
+            k = -G*m_i*m_j/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
+            forcex[i] += k*r_x;
+            forcey[i] += k*r_y;
+            forcex[j] += -k*r_x;
+            forcey[j] += -k*r_y;
+         
       }
-      forcex[i] = -G*m_i*forceSum_x; 
-      forcey[i] = -G*m_i*forceSum_y;      
+      //forcex[i] = -G*m_i*forceSum_x; 
+      //forcey[i] = -G*m_i*forceSum_y;      
    }
    // Using the force, update the velocity and position.
    for(int i=0;i<N;i++){
@@ -106,10 +108,10 @@ int main(int argc, const char* argv[]) {
    
  	int nsteps = atoi(argv[3]);
  	double delta_t = atof(argv[4]);
+ 	
    int graphics = atoi(argv[5]);
-   int fiveN=5*N;
- double *values =(double*)malloc(fiveN*sizeof(double));
- read_doubles_from_file(fiveN, values, argv[2]);
+ double *values =(double*)malloc(5*N*sizeof(double));
+ read_doubles_from_file(atoi(argv[1])*5, values, argv[2]);
  
  //Allocate memory for particles  
  particle_t *particles = (particle_t*)malloc(N*sizeof(particle_t));
@@ -173,7 +175,7 @@ int main(int argc, const char* argv[]) {
     j++;
     i=j*5;
  }
-   write_doubles_to_file(fiveN,values,"result.gal");
+   write_doubles_to_file(5*N,values,"result.gal");
    
   return 0;
  
