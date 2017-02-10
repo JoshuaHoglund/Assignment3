@@ -48,13 +48,14 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
             // Plumber spheres
             // use dummy variable???
             k = -G*m_i*m_j/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
-            forcex[i] += k*r_x; 
+            forcex[i] += k*r_x;
             forcey[i] += k*r_y;
-            forcex[j] += -k*r_x; 
+            forcex[j] += -k*r_x;
             forcey[j] += -k*r_y;
-            
-      }
          
+      }
+      //forcex[i] = -G*m_i*forceSum_x; 
+      //forcey[i] = -G*m_i*forceSum_y;      
         
    }
    // Using the force, update the velocity and position.
@@ -65,8 +66,8 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
       particles[i].x_pos += delta_t*particles[i].vel_x;
       particles[i].y_pos += delta_t*particles[i].vel_y;
    }
-   //free(forcex);
-   //free(forcey);
+   free(forcex);
+   free(forcey);
 }
 
  
@@ -77,8 +78,6 @@ int main(int argc, const char* argv[]) {
  // nsteps is the number of timesteps
  // graphics is 1 or 0 meaning graphics on/off
 
-   
-   
 // check if the parameters in the command line are correct, otherwise error message with instructions.	
   	if(argc != 6) {
       printf("Please give in: N filename nsteps delta_t graphics.\n");
@@ -133,7 +132,6 @@ int main(int argc, const char* argv[]) {
    if(!graphics) {
       for(int t=0;t<nsteps;t++) {
          // dont use function?
-         
          updateParticles(delta_t, particles, N);
       }
    }
@@ -158,7 +156,7 @@ int main(int argc, const char* argv[]) {
               DrawCircle(x, y, L, W, circleRadius, 0.1);          
            }
            Refresh();
-           usleep(800);
+           //usleep(800);
            updateParticles(delta_t, particles, N);
          }
     
