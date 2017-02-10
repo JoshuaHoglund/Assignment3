@@ -49,7 +49,7 @@ void updateParticles(double delta_t, double* values, int N) {
    for(int i=0;i<N;i++){
       m_i = 1/values[5*i+2];
       values[5*i+3]+=delta_t*forcex[i]*m_i;
-      values[5*i+4]+=delta_t*forcex[i]*m_i;
+      values[5*i+4]+=delta_t*forcey[i]*m_i;
       values[5*i]+=delta_t*values[5*i+3];
       values[5*i+1]+=delta_t*values[5*i+4];
    }
