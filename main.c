@@ -32,7 +32,7 @@ void updateParticles(double delta_t, double* values, int N) {
    for(int i=0; i<N; i++){
       x = values[5*i];
       y = values[5*i+1];
-      m_i = values[5*i+2]
+      m_i = values[5*i+2];
       
       // For each particle i, calculate the sum of the forces acting on it
       // two for loops!!!
