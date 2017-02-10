@@ -39,7 +39,7 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
       
       // For each particle i, calculate the sum of the forces acting on it
       // two for loops!!!
-      for(int j=i+1; j<N; j++){
+      for(int j=0; j<N; j++){
          
             m_j = particles[j].mass;
             
@@ -50,15 +50,13 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
             r_y = y-particles[j].y_pos;
             // Plumber spheres
             // use dummy variable???
-            k = -G*m_i*m_j/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
-            forcex[i] += k*r_x;
-            forcey[i] += k*r_y;
-            forcex[j] += -k*r_x;
-            forcey[j] += -k*r_y;
+            k = m_j/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
+            forceSum_x += k*r_x;
+            forceSum_y += k*r_y;
          
       }
-      //forcex[i] = -G*m_i*forceSum_x; 
-      //forcey[i] = -G*m_i*forceSum_y;      
+      forcex[i] = -G*m_i*forceSum_x; 
+      forcey[i] = -G*m_i*forceSum_y;      
    }
    // Using the force, update the velocity and position.
    for(int i=0;i<N;i++){
