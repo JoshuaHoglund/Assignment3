@@ -34,7 +34,7 @@ void updateParticles(double delta_t, double* values, int N) {
             
             // Calculate the distance betweem particles i and j.
             // USE SQRTF????
-            abs_r = sqrt((x-values[fiveJ])*(x-values[fiveJ])+(y-values[fiveJ+1])*(y-values[fiveJ+1]));
+            abs_r = sqrtf((x-values[fiveJ])*(x-values[fiveJ])+(y-values[fiveJ+1])*(y-values[fiveJ+1]));
             r_x = x-values[fiveJ];
             r_y = y-values[fiveJ+1];
             // Plumber spheres
