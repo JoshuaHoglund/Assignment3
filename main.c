@@ -15,7 +15,7 @@ typedef struct particle
    double       vel_y;
 } particle_t;
 
-void updateParticles(double delta_t, particle_t *particles, int N) {
+void updateParticles(double delta_t, double* values, int N) {
    //Set constants
    double *forcex=(double*)calloc(N,sizeof(double));
    double *forcey=(double*)calloc(N,sizeof(double));
@@ -30,21 +30,21 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
    double k;
    
    for(int i=0; i<N; i++){
-      x = particles[i].x_pos;
-      y = particles[i].y_pos;
-      m_i = particles[i].mass;
+      x = values[5*i];
+      y = values[5*i+1];
+      m_i = values[5*i+2]
       
       // For each particle i, calculate the sum of the forces acting on it
       // two for loops!!!
       for(int j=i+1; j<N; j++){
          
-            m_j = particles[j].mass;
+            m_j = values[5*j+2];
             
             // Calculate the distance betweem particles i and j.
             // USE SQRTF????
-            abs_r = sqrt((x-particles[j].x_pos)*(x-particles[j].x_pos)+(y-particles[j].y_pos)*(y-particles[j].y_pos));
-            r_x = x-particles[j].x_pos;
-            r_y = y-particles[j].y_pos;
+            abs_r = sqrt((x-values[5*j])*(x-values[5*j])+(y-values[5*j+1])*(y-values[5*j+1]));
+            r_x = x-values[5*j];
+            r_y = y-values[5*j+1];
             // Plumber spheres
             // use dummy variable???
             k = -G*m_i*m_j/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
@@ -60,11 +60,11 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
    }
    // Using the force, update the velocity and position.
    for(int i=0;i<N;i++){
-      m_i = 1/particles[i].mass;
-      particles[i].vel_x += delta_t*forcex[i]*m_i;
-      particles[i].vel_y += delta_t*forcey[i]*m_i;
-      particles[i].x_pos += delta_t*particles[i].vel_x;
-      particles[i].y_pos += delta_t*particles[i].vel_y;
+      m_i = 1/values[5*i+2];
+      values[5*i+3]+=delta_t*forcex[i]*m_i;
+      values[5*i+4]+=delta_t*forcex[i]*m_i;
+      values[5*i]+=delta_t*values[5*i+3];
+      values[5*i+1]+=delta_t*values[5*i+4];
    }
    free(forcex);
    free(forcey);
@@ -115,24 +115,11 @@ int main(int argc, const char* argv[]) {
  
  //Allocate memory for particles  
  particle_t *particles = (particle_t*)malloc(N*sizeof(particle_t));
- 
- //Set the particle data  
- int i = 0;
- int j = 0;  
- while(j<N){
-    particles[j].x_pos = values[i];
-    particles[j].y_pos = values[i+1];
-    particles[j].mass = values[i+2];
-    particles[j].vel_x = values[i+3];
-    particles[j].vel_y = values[i+4];
-    j++;
-    i=j*5;
- }
    
    if(!graphics) {
       for(int t=0;t<nsteps;t++) {
          // dont use function?
-         updateParticles(delta_t, particles, N);
+         updateParticles(delta_t, values, N);
       }
    }
    else {
@@ -157,24 +144,13 @@ int main(int argc, const char* argv[]) {
            }
            Refresh();
            //usleep(800);
-           updateParticles(delta_t, particles, N);
+           updateParticles(delta_t, values, N);
          }
     
      FlushDisplay();
      CloseDisplay();
    }
-
- i = 0;
- j = 0;  
- while(j<N){
-    values[i] = particles[j].x_pos;
-    values[i+1] = particles[j].y_pos;
-    values[i+2] = particles[j].mass;
-    values[i+3] = particles[j].vel_x;
-    values[i+4] = particles[j].vel_y;
-    j++;
-    i=j*5;
- }
+   
    write_doubles_to_file(5*N,values,"result.gal");
    
   return 0;
