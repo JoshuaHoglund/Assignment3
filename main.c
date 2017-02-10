@@ -98,7 +98,7 @@ int main(int argc, const char* argv[]) {
  	
    int graphics = atoi(argv[5]);
  double *values =(double*)malloc(5*N*sizeof(double));
- read_doubles_from_file(N*5, values, ptr_file);
+ read_doubles_from_file(N*5, values, *ptr_file);
  
  //Allocate memory for particles  
    
