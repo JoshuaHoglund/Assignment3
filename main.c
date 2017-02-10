@@ -103,7 +103,6 @@ int main(int argc, const char* argv[]) {
  read_doubles_from_file(atoi(argv[1])*5, values, argv[2]);
  
  //Allocate memory for particles  
- particle_t *particles = (particle_t*)malloc(N*sizeof(particle_t));
    
    if(!graphics) {
       for(int t=0;t<nsteps;t++) {
