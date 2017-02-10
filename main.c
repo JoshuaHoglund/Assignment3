@@ -15,31 +15,26 @@ typedef struct particle
    double       vel_y;
 } particle_t;
 
-void updateParticles(double delta_t, particle_t *particles, int N) {
+void updateParticles(double delta_t, particle_t *particles, int N, double * forcex, double * forcey) {
    //Set constants
-   double *forcex=(double*)malloc(N*sizeof(double));
-   double *forcey=(double*)malloc(N*sizeof(double));
    const double G = 100.0/N;
    const double eps = 0.001;
    double abs_r;
    double r_x, r_y;
    double x;
    double y;
-   double forceSum_x, forceSum_y;
    double m_j;
    double m_i;
    double k;
    
    for(int i=0; i<N; i++){
-      forceSum_x = 0;
-      forceSum_y = 0;
       x = particles[i].x_pos;
       y = particles[i].y_pos;
       m_i = particles[i].mass;
       
       // For each particle i, calculate the sum of the forces acting on it
       // two for loops!!!
-      for(int j=0; j<N; j++){
+      for(int j=i+1; j<N; j++){
          
             m_j = particles[j].mass;
             
@@ -51,12 +46,13 @@ void updateParticles(double delta_t, particle_t *particles, int N) {
             // Plumber spheres
             // use dummy variable???
             k = -G*m_i*m_j/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
-            forceSum_x += k*r_x;
-            forceSum_y += k*r_y;
+            forcex[i] = k*r_x; 
+            forcey[i] = k*r_y;
+            forcex[j] = -k*r_x; 
+            forcey[j] = -k*r_y;
             
       }
-      forcex[i] = -G*m_i*forceSum_x; 
-      forcey[i] = -G*m_i*forceSum_y;      
+         
         
    }
    // Using the force, update the velocity and position.
@@ -76,7 +72,10 @@ int main(int argc, const char* argv[]) {
  // filename is the filename of the file to read the initial configuration from 
  // nsteps is the number of timesteps
  // graphics is 1 or 0 meaning graphics on/off
-
+double *forcex=(double*)malloc(N*sizeof(double));
+   double *forcey=(double*)malloc(N*sizeof(double));
+   
+   
 // check if the parameters in the command line are correct, otherwise error message with instructions.	
   	if(argc != 6) {
       printf("Please give in: N filename nsteps delta_t graphics.\n");
@@ -131,7 +130,8 @@ int main(int argc, const char* argv[]) {
    if(!graphics) {
       for(int t=0;t<nsteps;t++) {
          // dont use function?
-         updateParticles(delta_t, particles, N);
+         
+         updateParticles(delta_t, particles, N, forcex, forcey);
       }
    }
    else {
@@ -156,7 +156,7 @@ int main(int argc, const char* argv[]) {
            }
            Refresh();
            usleep(800);
-           updateParticles(delta_t, particles, N);
+           updateParticles(delta_t, particles, N, forcex, forcey);
          }
     
      FlushDisplay();
