@@ -55,8 +55,8 @@ void updateParticles(double delta_t, double* values, int N) {
       values[5*i]+=delta_t*values[5*i+3];
       values[5*i+1]+=delta_t*values[5*i+4];
    }
-   free(forcex);
-   free(forcey);
+   //free(forcex);
+  // free(forcey);
 }
 
  
