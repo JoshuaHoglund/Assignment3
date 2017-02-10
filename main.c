@@ -72,8 +72,7 @@ int main(int argc, const char* argv[]) {
  // filename is the filename of the file to read the initial configuration from 
  // nsteps is the number of timesteps
  // graphics is 1 or 0 meaning graphics on/off
-double *forcex=(double*)malloc(N*sizeof(double));
-   double *forcey=(double*)malloc(N*sizeof(double));
+
    
    
 // check if the parameters in the command line are correct, otherwise error message with instructions.	
@@ -103,7 +102,8 @@ double *forcex=(double*)malloc(N*sizeof(double));
    
  		
   	fclose(ptr_file);
-   
+   double *forcex=(double*)malloc(N*sizeof(double));
+   double *forcey=(double*)malloc(N*sizeof(double));
  	int nsteps = atoi(argv[3]);
  	double delta_t = atof(argv[4]);
  	
