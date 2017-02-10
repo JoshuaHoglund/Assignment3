@@ -15,8 +15,10 @@ typedef struct particle
    double       vel_y;
 } particle_t;
 
-void updateParticles(double delta_t, particle_t *particles, int N, double * forcex, double * forcey) {
+void updateParticles(double delta_t, particle_t *particles, int N) {
    //Set constants
+   double *forcex=(double*)malloc(N*sizeof(double));
+   double *forcey=(double*)malloc(N*sizeof(double));
    const double G = 100.0/N;
    const double eps = 0.001;
    double abs_r;
@@ -46,7 +48,7 @@ void updateParticles(double delta_t, particle_t *particles, int N, double * forc
             // Plumber spheres
             // use dummy variable???
             k = -G*m_i*m_j/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
-            forcex[i] = k*r_x; 
+            forcex[i] += k*r_x; 
             forcey[i] = k*r_y;
             forcex[j] = -k*r_x; 
             forcey[j] = -k*r_y;
@@ -63,6 +65,8 @@ void updateParticles(double delta_t, particle_t *particles, int N, double * forc
       particles[i].x_pos += delta_t*particles[i].vel_x;
       particles[i].y_pos += delta_t*particles[i].vel_y;
    }
+   free(forcex);
+   free(forcey);
 }
 
  
@@ -102,8 +106,7 @@ int main(int argc, const char* argv[]) {
    
  		
   	fclose(ptr_file);
-   double *forcex=(double*)malloc(N*sizeof(double));
-   double *forcey=(double*)malloc(N*sizeof(double));
+   
  	int nsteps = atoi(argv[3]);
  	double delta_t = atof(argv[4]);
  	
@@ -131,7 +134,7 @@ int main(int argc, const char* argv[]) {
       for(int t=0;t<nsteps;t++) {
          // dont use function?
          
-         updateParticles(delta_t, particles, N, forcex, forcey);
+         updateParticles(delta_t, particles, N);
       }
    }
    else {
@@ -156,7 +159,7 @@ int main(int argc, const char* argv[]) {
            }
            Refresh();
            usleep(800);
-           updateParticles(delta_t, particles, N, forcex, forcey);
+           updateParticles(delta_t, particles, N);
          }
     
      FlushDisplay();
