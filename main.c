@@ -36,9 +36,9 @@ void updateParticles(double delta_t, double* values, int N) {
             // Calculate the distance betweem particles i and j.
             abs_r = sqrtf((x-values[fiveJ])*(x-values[fiveJ])+(y-values[fiveJ+1])*(y-values[fiveJ+1]));
             r_x = x-values[fiveJ];
-            printf("r_x: %lf", r_x);
+            printf("r_x: %lf \n", r_x);
             r_y = y-values[fiveJ+1];
-            printf("r_y: %lf", r_y);
+            printf("r_y: %lf \n", r_y);
             // Plumber spheres
             k = -G*m_i*m_j/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
             forcex[i] += k*r_x;
@@ -46,8 +46,8 @@ void updateParticles(double delta_t, double* values, int N) {
             forcex[j] += -k*r_x;
             forcey[j] += -k*r_y;         
       }
-       printf("forceX: %lf", forcex[i]);
-   printf("forceX: %lf", forcey[i]);
+       printf("forceX: %lf \n", forcex[i]);
+   printf("forceX: %lf \n", forcey[i]);
    }
    // Using the force, update the velocity and position.
    for(int i=0;i<N;i++){
