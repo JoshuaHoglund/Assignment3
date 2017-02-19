@@ -45,7 +45,9 @@ void updateParticles(double delta_t, double* values, int N) {
             forcey[i] += k*r_y;
             forcex[j] += -k*r_x;
             forcey[j] += -k*r_y;         
-      }            
+      }
+       printf("forceX: %lf", forcex[i]);
+   printf("forceX: %lf", forcey[i]);
    }
    // Using the force, update the velocity and position.
    for(int i=0;i<N;i++){
@@ -56,8 +58,7 @@ void updateParticles(double delta_t, double* values, int N) {
       values[fiveI]+=delta_t*values[fiveI+3];
       values[fiveI+1]+=delta_t*values[fiveI+4];
    }
-   printf("forceX: %lf", forcex);
-   printf("forceX: %lf", forcey);
+  
    
    free(forcex);
    free(forcey);
