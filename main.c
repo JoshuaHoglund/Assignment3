@@ -34,7 +34,7 @@ void updateParticles(double delta_t, double* values, int N) {
             m_j = values[fiveJ+2];
             
             // Calculate the distance betweem particles i and j.
-            abs_r = sqrtf((x-values[fiveJ])*(x-values[fiveJ])+(y-values[fiveJ+1])*(y-values[fiveJ+1]));
+            abs_r = sqrt((x-values[fiveJ])*(x-values[fiveJ])+(y-values[fiveJ+1])*(y-values[fiveJ+1]));
             r_x = x-values[fiveJ];
             printf("r_x: %lf \n", r_x);
             r_y = y-values[fiveJ+1];
