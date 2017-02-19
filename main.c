@@ -87,11 +87,12 @@ int main(int argc, const char* argv[]) {
   	
  // read in filename and open filename. 	
    FILE *ptr_file;
+   	ptr_file = fopen(argv[2], "r");
    if(!ptr_file){
   		printf("File does not exist." );
   		return 1;}
    
-  	ptr_file = fopen(argv[2], "r");
+  
   	fclose(ptr_file);
    
  	int nsteps = atoi(argv[3]);
