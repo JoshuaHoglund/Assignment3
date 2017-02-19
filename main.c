@@ -36,8 +36,9 @@ void updateParticles(double delta_t, double* values, int N) {
             // Calculate the distance betweem particles i and j.
             abs_r = sqrtf((x-values[fiveJ])*(x-values[fiveJ])+(y-values[fiveJ+1])*(y-values[fiveJ+1]));
             r_x = x-values[fiveJ];
+            printf("r_x: %lf", r_x);
             r_y = y-values[fiveJ+1];
-         
+            printf("r_y: %lf", r_y);
             // Plumber spheres
             k = -G*m_i*m_j/((abs_r+eps)*(abs_r+eps)*(abs_r+eps));
             forcex[i] += k*r_x;
@@ -55,6 +56,9 @@ void updateParticles(double delta_t, double* values, int N) {
       values[fiveI]+=delta_t*values[fiveI+3];
       values[fiveI+1]+=delta_t*values[fiveI+4];
    }
+   printf("forceX: %lf", forcex);
+   printf("forceX: %lf", forcey);
+   
    free(forcex);
    free(forcey);
 }
@@ -123,7 +127,7 @@ int main(int argc, const char* argv[]) {
            }
            Refresh();
            // We tried using a sleep function but we got an error message on linux
-           //usleep(800);
+           usleep(80000);
            updateParticles(delta_t, values, N);
          }    
      FlushDisplay();
