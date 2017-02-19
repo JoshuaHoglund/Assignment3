@@ -129,7 +129,7 @@ int main(int argc, const char* argv[]) {
            }
            Refresh();
            // We tried using a sleep function but we got an error message on linux
-           usleep(8000000);
+           usleep(8000);
            updateParticles(delta_t, values, N);
          }    
      FlushDisplay();
