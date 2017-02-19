@@ -47,7 +47,7 @@ void updateParticles(double delta_t, double* values, int N) {
             forcey[j] += -k*r_y;         
       }
        printf("forceX: %lf \n", forcex[i]);
-   printf("forceX: %lf \n", forcey[i]);
+   printf("forceY: %lf \n", forcey[i]);
    }
    // Using the force, update the velocity and position.
    for(int i=0;i<N;i++){
@@ -129,7 +129,7 @@ int main(int argc, const char* argv[]) {
            }
            Refresh();
            // We tried using a sleep function but we got an error message on linux
-           usleep(80000);
+           usleep(80000000);
            updateParticles(delta_t, values, N);
          }    
      FlushDisplay();
